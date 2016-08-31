@@ -1,0 +1,38 @@
+{
+  "name": "Angular",
+  "version": "1.0.0",
+  "description": "angular bootstrap",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular",
+    "boot"
+  ],
+  "author": "dimanklg",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^2.0.2",
+    "gulp-jshint": "^2.0.0",
+    "gulp-rigger": "^0.5.8",
+    "gulp-sass": "^2.2.0",
+    "gulp-plumber": "",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
+    "gulp-uglifyjs":"",
+    "gulp-sourcemaps":"",
+    "babel-core": "^6.0.20",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^6.0.1",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.6.2"
+  },
+  "dependencies": {
+  }
+}
