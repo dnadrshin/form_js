@@ -1,42 +1,59 @@
 $(function() {
-var poemForm = document.forms['poem'];
+	var poemForm = document.forms['poem'];
 
-var poemName = poemForm.elements.name.value;
-var poemEmail = poemForm.elements.email.value;
-var poemPhone = poemForm.elements.phone.value;
-var poemText = poemForm.elements.poem.value;
-var poemApprove = poemForm.elements.approve.checked;
+	var poemName = poemForm.elements.name.value;
 
-var Poem = {
-	Name: poemForm.elements.name,
-	Email: poemForm.elements.email,
-	Phone: poemForm.elements.phone,
-	Text: poemForm.elements.poem,
-	Approve: poemForm.elements.approve,
-	allFieldFill: false,
-	red: "1px solid red",
-	onClick: function(){
-		if(this.Name.value=="") this.Name.style.border this.red else this.Name.style.border = "0px";
-		if(this.Email.value=="") this.Email.style.border = "1px solid red" else this.Email.style.border = "0px";
-		if(this.Phone.value=="") this.Phone.style.border = "1px solid red" else this.Phone.style.border = "0px";
+
+	var Poem = {
+		fields:{
+			Name: poemForm.elements.name,
+			Email: poemForm.elements.email,
+			Phone: poemForm.elements.phone,
+			Text: poemForm.elements.poem[0]
+		},
+		Approve: poemForm.elements.approve,
+		approveLable: document.getElementsByClassName('planeta_form_submit')[0].getElementsByTagName('label')[0],
+		allFieldFill: false,
+		red: "2px solid red",
+
+		checkField: function(el){
+			if(el.value=="") el.style.border = this.red; else el.style.border = "0px";
+			return (el.value!="")
+		},
+		sendAJAX: function(){
+			console.log('AJAX');
+			$.post( "/test.php", $( "#poemForm" ).serialize() );
+		},
+
+		onClick: function(){
+			this.allFieldFill = true;
+			for(el in this.fields){
+				this.checkField(this.fields[el]);
+				this.allFieldFill = this.allFieldFill&&this.checkField(this.fields[el]);
+			}
+
+			if(!this.Approve.checked) this.approveLable.style.color = "red"; else this.approveLable.style.color = "#fff";
+			this.allFieldFill = this.allFieldFill&&this.Approve.checked;
+
+			if(this.allFieldFill)this.sendAJAX();
+
+			return false;
+		}
 	}
-}
 
-if (poemForm.addEventListener) {
-    poemForm.addEventListener("submit", function(evt) {
-        evt.preventDefault();
-        window.history.back();
-        Poem.onClick();
-    }, true);
-}
-else {
-    poemFormt.attachEvent('onsubmit', function(evt){
-        evt.preventDefault();
-        window.history.back();
-        Poem.onClick();
-    });
-}
-
-
+	if (poemForm.addEventListener) {
+	    poemForm.addEventListener("submit", function(evt) {
+	        evt.preventDefault();
+	        window.history.back();
+	        Poem.onClick();
+	    }, true);
+	}
+	else {
+	    poemFormt.attachEvent('onsubmit', function(evt){
+	        evt.preventDefault();
+	        window.history.back();
+	        Poem.onClick();
+	    });
+	}
 
 });
