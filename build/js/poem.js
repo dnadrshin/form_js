@@ -21,8 +21,8 @@ $(function() {
 			return (el.value!="")
 		},
 		sendAJAX: function(){
-			console.log('AJAX');
-			$.post( "/test.php", $( "#poemForm" ).serialize() );
+			$(".poem_popup").fadeIn();
+			//$.post( "/test.php", $( "#poemForm" ).serialize() );
 		},
 
 		onClick: function(){
@@ -37,23 +37,27 @@ $(function() {
 
 			if(this.allFieldFill)this.sendAJAX();
 
-			return false;
 		}
 	}
 
 	if (poemForm.addEventListener) {
 	    poemForm.addEventListener("submit", function(evt) {
 	        evt.preventDefault();
-	        window.history.back();
+	        //window.history.back();
 	        Poem.onClick();
+	        return false;
 	    }, true);
 	}
 	else {
 	    poemFormt.attachEvent('onsubmit', function(evt){
 	        evt.preventDefault();
-	        window.history.back();
+	        //window.history.back();
 	        Poem.onClick();
 	    });
 	}
+
+	$(".poem_popup").click(function(){
+		$(".poem_popup").fadeOut();
+	})
 
 });
