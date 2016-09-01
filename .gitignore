@@ -5,4 +5,4 @@ npm-debug.log
 dist
 *.7z
 *.zip
-index.html
+src/index.html
