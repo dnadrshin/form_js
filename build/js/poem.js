@@ -1,9 +1,9 @@
-$(function() {
-	var poemForm = document.forms['poem'];
+$(function(){
+	var poemForm = document.forms.poem;
 
 	var Poem = {
 		/**
-		 * Object with elements
+		 * Object with elements of form
 		 * @type {Object}
 		 */
 		fields:{
@@ -23,20 +23,22 @@ $(function() {
 		 * @return {boolean}    is element fill
 		 */
 		checkField: function(el){
-			if(el.value=="") el.style.border = this.red; else el.style.border = "0px";
-			return (el.value!="")
+			if(el.value==="") el.style.border = this.red; else el.style.border = "0px";
+			return (el.value!=="");
 		},
 		/**
 		 * Open popup window and send form data via AJAX
 		 */
 		sendAJAX: function(){
 			$(".poem_popup").fadeIn();
-			//$.post( "/test.php", $( "#poemForm" ).serialize() );//uncomment
+			//$.post( "/test.php", $( "#poemForm" ).serialize(), function(){
+			//	poemForm.reset();
+			//} );//uncomment for AJAX
 		},
 
 		onClick: function(){
 			this.allFieldFill = true;
-			for(el in this.fields){
+			for(var el in this.fields){
 				this.checkField(this.fields[el]);
 				this.allFieldFill = this.allFieldFill&&this.checkField(this.fields[el]);
 			}
@@ -47,8 +49,11 @@ $(function() {
 			if(this.allFieldFill)this.sendAJAX();
 
 		}
-	}
+	};
 
+	/**
+	 * Sumbit form event listner
+	 */
 	if (poemForm.addEventListener) {
 	    poemForm.addEventListener("submit", function(evt) {
 	        evt.preventDefault();
@@ -62,8 +67,11 @@ $(function() {
 	    });
 	}
 
+	/**
+	 * Close popup window
+	 */
 	$(".poem_popup").click(function(){
 		$(".poem_popup").fadeOut();
-	})
+	});
 
 });
