@@ -1,10 +1,11 @@
 $(function() {
 	var poemForm = document.forms['poem'];
 
-	var poemName = poemForm.elements.name.value;
-
-
 	var Poem = {
+		/**
+		 * Object with elements
+		 * @type {Object}
+		 */
 		fields:{
 			Name: poemForm.elements.name,
 			Email: poemForm.elements.email,
@@ -16,13 +17,21 @@ $(function() {
 		allFieldFill: false,
 		red: "2px solid red",
 
+		/**
+		 * Check field and if it not fill made it red
+		 * @param  {DOM object} el - checked DOM object
+		 * @return {boolean}    is element fill
+		 */
 		checkField: function(el){
 			if(el.value=="") el.style.border = this.red; else el.style.border = "0px";
 			return (el.value!="")
 		},
+		/**
+		 * Open popup window and send form data via AJAX
+		 */
 		sendAJAX: function(){
 			$(".poem_popup").fadeIn();
-			//$.post( "/test.php", $( "#poemForm" ).serialize() );
+			//$.post( "/test.php", $( "#poemForm" ).serialize() );//uncomment
 		},
 
 		onClick: function(){
@@ -43,15 +52,12 @@ $(function() {
 	if (poemForm.addEventListener) {
 	    poemForm.addEventListener("submit", function(evt) {
 	        evt.preventDefault();
-	        //window.history.back();
 	        Poem.onClick();
-	        return false;
 	    }, true);
 	}
 	else {
 	    poemFormt.attachEvent('onsubmit', function(evt){
 	        evt.preventDefault();
-	        //window.history.back();
 	        Poem.onClick();
 	    });
 	}
